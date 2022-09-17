@@ -2,20 +2,15 @@
 
 from sys import argv, exit
 import math
-
-def print_help():
-    print("USAGE")
-    print("\t./302separation file [n | p1 p2]")
-    print("DESCRIPTION")
-    print("\tfile\tfile that contains the list of Facebook connections")
-    print("\tn\tmaximum length of the paths")
-    print("\tpi\tname of someone in the file")
-    return (0)
+from src.parsing import print_help
+from src.parsing import check_error
 
 def main():
     if (len(argv) == 2 and argv[1] == "-h"):
         print_help()
         return (0)
+    if (check_error(argv) == 84):
+        return (84)
     return (0)
 
 if __name__ == "__main__":
