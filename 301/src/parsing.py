@@ -16,11 +16,15 @@ def check_error(argv):
         return 1
     numbers = []
     i = 0
-    with open(argv[1], "r") as fileData:
+    try:
+        fileData = open(argv[1], "r")
         for l in fileData:
             data=[str(d) for d in l.split(" ")]
             while(len(data) > i):
                 num =float(data[i])
                 numbers.append(num)
                 i = i + 1
-    return (numbers)
+        return (numbers)
+    except:
+        print("Error: File does not appear to exist.")
+        return 84
