@@ -24,3 +24,5 @@ def quicksort(numbers):
     print("Quicksort: ", end="")
     print(quick, end="")
     print(" comparisons")
+
+    return 0

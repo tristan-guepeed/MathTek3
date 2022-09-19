@@ -39,3 +39,5 @@ def mergesort(numbers):
     print("Mergesort: ", end="")
     print(merge, end="")
     print(" comparisons")
+
+    return 0
