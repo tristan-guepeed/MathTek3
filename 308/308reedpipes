@@ -2,10 +2,13 @@
 
 from sys import argv, exit
 from src.parsing import check_error
+from src.pipes import pipes
 
 def main():
-    rt = check_error(argv)
-    return (rt)
+    if (check_error(argv) == 84):
+        return (84)
+    pipes(argv)
+    return (0)
 
 if __name__ == "__main__":
     exit(main())

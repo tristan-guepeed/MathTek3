@@ -14,5 +14,25 @@ def print_help():
     return (0)
 
 def check_error(argv):
-    print_help()
+    if (len(argv) == 2 and argv[1] == "-h"):
+        print_help()
+        return (0)
+    if (len(argv) != 7):
+        print("Error: too many or too much arguments")
+        return (84)
+    try:
+        float(argv[1])
+        float(argv[2])
+        float(argv[3])
+        float(argv[4])
+        float(argv[5])
+        int(argv[6])
+    except:
+        print("Error: all the arguments must be number")
+    i = 1
+    while (i < 7):
+        if (float(argv[i]) <= 0):
+            print("Error: all the arguments must ne number > 0")
+            return (84)
+        i = i + 1
     return (0)
