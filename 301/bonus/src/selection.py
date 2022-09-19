@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
-def selection(numbers):
+import time
+
+def selection(numbers, tps):
     selectionsort = 0
     retenu = -1
     retenu2 = 0.0
@@ -10,6 +12,7 @@ def selection(numbers):
         select.append(numbers[a])
         a+=1
     #print(select)
+    tps1 = time.time()
     while (i != len(select) - 1):
         while (j < len(select)):
             if (select[i] > select[j]):
@@ -32,6 +35,8 @@ def selection(numbers):
             select[i] = retenu2
             i+=1
         retenu = -1
+    tps2 = time.time()
+    tps.append(tps2 - tps1)
     #print(select)
     print("Selection sort: ", end="")
     print(selectionsort, end="")

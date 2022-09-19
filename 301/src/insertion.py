@@ -2,7 +2,6 @@
 
 def insertion(numbers):
     insertionsort = 0
-    passe = 0
     retenu = 0
     select = numbers
     i, j, a = 0, 1, 0

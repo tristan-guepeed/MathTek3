@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import time
+
 merge = 0
 
 def mergeSort(numbers):
@@ -32,10 +34,13 @@ def mergeSort(numbers):
             i+=1
     return numbers
 
-def mergesort(numbers):
+def mergesort(numbers, tps):
     global merge
 
+    tps1 = time.time()
     mergeSort(numbers)
+    tps2 = time.time()
+    tps.append(tps2 - tps1)
     print("Mergesort: ", end="")
     print(merge, end="")
     print(" comparisons")

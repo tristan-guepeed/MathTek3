@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import time
+
 def quickSort(numbers):
     quick, check = 0, numbers
     if len(check) <= 1:
@@ -19,8 +21,11 @@ def quickSort(numbers):
     quick += left[1] + right[1]
     return check, quick
 
-def quicksort(numbers):
+def quicksort(numbers, tps):
+    tps1 = time.time()
     quick = quickSort(numbers)[1]
+    tps2 = time.time()
+    tps.append(tps2 - tps1)
     print("Quicksort: ", end="")
     print(quick, end="")
     print(" comparisons")
