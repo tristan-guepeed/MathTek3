@@ -1,20 +1,16 @@
 #!/usr/bin/env python3
 
 from sys import argv, exit
-import math
-
-def print_help():
-    print("USAGE")
-    print("\t./305construction file")
-    print("")
-    print("DESCRIPTION")
-    print("\tfile\tfile describing the tasks")
-    return (0)
+from src.parsing import check_errors
+from src.construction import construction
 
 def main():
-    if (len(argv) == 2 and argv[1] == "-h"):
-        print_help()
-        return (0)
+    rt = check_errors(argv)
+    if (rt == 1):
+        return 0
+    if (rt == 84):
+        return 84
+    construction(rt)
     return (0)
 
 if __name__ == "__main__":
