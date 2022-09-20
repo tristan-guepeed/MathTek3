@@ -12,9 +12,13 @@ def main():
     if (rt == 1):
         return 0
     if (rt == 2):
-        matrix()
+        rt = matrix(argv)
+        if (rt == 84):
+            return 84
     if (len(argv) == 3):
-        commands()
+        rt = commands(argv)
+        if (rt == 84):
+            return 84
 
 if __name__ == "__main__":
     exit(main())
