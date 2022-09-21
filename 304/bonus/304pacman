@@ -6,10 +6,10 @@ from src.pathfinding import pathfinding
 
 def main():
     rt = check_error(argv)
-    if (rt == 84):
-        return (84)
-    elif (rt == 1):
+    if (rt == 1):
         return (0)
+    elif (rt == 84):
+        return (84)
     pathfinding(argv)
     return (0)
 

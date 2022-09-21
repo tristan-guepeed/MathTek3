@@ -4,12 +4,10 @@ from src.get_file import get_file
 
 def print_help():
     print("USAGE")
-    print("\t./304pacman file c1 c2")
+    print("\t./304pacman file")
     print("\tfile\tfile describing the board, using the following characters:\n\t\t    '0' for an empty square,\n\t\t    '1' for a wall,\n\t\t    'F' for the ghost's position,\n\t\t    'P' for Pacman's position.")
-    print("\tc1\tcharacter to display for a wall")
-    print("\tc2\tcharacter to display for an empty space.")
     print("DESCRIPTION")
-    print("\tMake a pathfinding for the pacman game.")
+    print("\tMake a pathfinding for pacPan in pygame.")
     return (0)
 
 def check_file(filename):
@@ -37,8 +35,8 @@ def check_error(argv):
     if (len(argv) == 2 and argv[1] == "-h"):
         print_help()
         return (1)
-    if (len(argv) != 4):
-        print("Error: you need 3 arguments")
+    if (len(argv) != 2):
+        print("Error: you need 1 arguments")
         return (84)
     try:
         open(argv[1], "r")
@@ -47,11 +45,5 @@ def check_error(argv):
         return (84)
     if (check_file(argv[1]) == 84):
         print("Error: bad file")
-        return (84)
-    if (len(argv[2]) != 1 or len(argv[3]) != 1):
-        print("Error: the second and the third arguments must be one caracter")
-        return (84)
-    if (argv[2] == argv[3]):
-        print("Error: the second and the third arguments must be different")
         return (84)
     return (0)

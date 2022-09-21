@@ -1,18 +1,7 @@
 #!/usr/bin/env python3
 
+import pygame
 from src.get_file import get_file
-
-def draw_map(pacMap):
-    i = 0
-
-    while (i < len(pacMap)):
-        ii = 0
-        while (ii < len(pacMap[i])):
-            print(pacMap[i][ii], end='')
-            ii = ii + 1
-        print("")
-        i = i + 1
-    return (0)
 
 def replace_map(pacMap, wall, emptySpace):
     i = 0
@@ -150,6 +139,30 @@ def check_end(pacMap, count, i, ii):
             return (0)
     return (-1)
 
+def draw_map(pacMap, fenetre):
+    i = 0
+    x = 50
+    y = 50
+    while (i < len(pacMap)):
+        ii = 0
+        x = 50
+        while (ii < len(pacMap[i])):
+            if (pacMap[i][ii] == 'o'):
+                pygame.draw.rect(fenetre, [255, 0, 0], [x, y, 50, 50])
+            elif (pacMap[i][ii] == ' '):
+                pygame.draw.rect(fenetre, [0, 255, 0], [x, y, 50, 50])
+            elif (pacMap[i][ii] == 'P'):
+                pygame.draw.rect(fenetre, [0, 0, 0], [x, y, 50, 50])
+            elif (pacMap[i][ii] == 'F'):
+                pygame.draw.rect(fenetre, [255, 255, 255], [x, y, 50, 50])
+            else:
+                pygame.draw.rect(fenetre, [0, 0, 255], [x, y, 50, 50])
+            x = x + 50
+            ii = ii + 1
+        y = y + 50
+        i = i + 1
+    return (0)
+
 def find_the_path(pacMap, emptySpace):
     maxTurn = 0
     if (len(pacMap) > len(pacMap[0])):
@@ -159,70 +172,85 @@ def find_the_path(pacMap, emptySpace):
     count = 2
     x = 0
     y = 0
-
     while (pacMap[x][y] != 'F'):
         x = x + 1
         if (x >= len(pacMap)):
             x = 0
             y = y + 1
-    while (count < 100):
-        turn = 1
-        while (turn < maxTurn):
-            i = x - turn
-            ii = y
-            while (i < x):
-                if (i >= 0 and i < len(pacMap) and ii >= 0 and ii < len(pacMap[i])):
-                    if (pacMap[i][ii] == get_char((count - 1) % 10)):
-                        pacMap = put_way(pacMap, count, emptySpace, i, ii)
-                        if (check_end(pacMap, count, i, ii) == 0):
-                            draw_map(pacMap)
-                            return (0)
-                i = i + 1
-                ii = ii + 1
-            i = x
-            ii = y + turn
-            while (ii > y):
-                if (i >= 0 and i < len(pacMap) and ii >= 0 and ii < len(pacMap[i])):
-                    if (pacMap[i][ii] == get_char((count - 1) % 10)):
-                        pacMap = put_way(pacMap, count, emptySpace, i, ii)
-                        if (check_end(pacMap, count, i, ii) == 0):
-                            draw_map(pacMap)
-                            return (0)
-                i = i + 1
-                ii = ii - 1
-            ii = y
-            i = x + turn
-            while (i > x):
-                if (i >= 0 and i < len(pacMap) and ii >= 0 and ii < len(pacMap[i])):
-                    if (pacMap[i][ii] == get_char((count - 1) % 10)):
-                        pacMap = put_way(pacMap, count, emptySpace, i, ii)
-                        if (check_end(pacMap, count, i, ii) == 0):
-                            draw_map(pacMap)
-                            return (0)
-                i = i - 1
-                ii = ii - 1
-            ii = y - turn
-            i = x
-            while (ii < y):
-                if (i >= 0 and i < len(pacMap) and ii >= 0 and ii < len(pacMap[i])):
-                    if (pacMap[i][ii] == get_char((count - 1) % 10)):
-                        pacMap = put_way(pacMap, count, emptySpace, i, ii)
-                        if (check_end(pacMap, count, i, ii) == 0):
-                            draw_map(pacMap)
-                            return (0)
-                ii = ii + 1
-                i = i - 1
-            turn = turn + 1
-        count = count + 1
+
+            
+    pygame.init()
+    clock = pygame.time.Clock()
+    fenetre = pygame.display.set_mode((1920, 1080))
+    loop = True
+    background = pygame.Surface(fenetre.get_size())
+    while loop:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                loop = False
+        background.fill([0, 200, 255])
+        fenetre.blit(background, (0, 0))
+        pygame.display.flip()
+        clock.tick(10)
+
+        if (count < 100):
+            turn = 1
+            while (turn < maxTurn):
+                i = x - turn
+                ii = y
+                while (i < x):
+                    if (i >= 0 and i < len(pacMap) and ii >= 0 and ii < len(pacMap[i])):
+                        if (pacMap[i][ii] == get_char((count - 1) % 10)):
+                            pacMap = put_way(pacMap, count, emptySpace, i, ii)
+                            if (check_end(pacMap, count, i, ii) == 0):
+                                return (0)
+                    i = i + 1
+                    ii = ii + 1
+                i = x
+                ii = y + turn
+                while (ii > y):
+                    if (i >= 0 and i < len(pacMap) and ii >= 0 and ii < len(pacMap[i])):
+                        if (pacMap[i][ii] == get_char((count - 1) % 10)):
+                            pacMap = put_way(pacMap, count, emptySpace, i, ii)
+                            if (check_end(pacMap, count, i, ii) == 0):
+                                return (0)
+                    i = i + 1
+                    ii = ii - 1
+                ii = y
+                i = x + turn
+                while (i > x):
+                    if (i >= 0 and i < len(pacMap) and ii >= 0 and ii < len(pacMap[i])):
+                        if (pacMap[i][ii] == get_char((count - 1) % 10)):
+                            pacMap = put_way(pacMap, count, emptySpace, i, ii)
+                            if (check_end(pacMap, count, i, ii) == 0):
+                                return (0)
+                    i = i - 1
+                    ii = ii - 1
+                ii = y - turn
+                i = x
+                while (ii < y):
+                    if (i >= 0 and i < len(pacMap) and ii >= 0 and ii < len(pacMap[i])):
+                        if (pacMap[i][ii] == get_char((count - 1) % 10)):
+                            pacMap = put_way(pacMap, count, emptySpace, i, ii)
+                            if (check_end(pacMap, count, i, ii) == 0):
+                                return (0)
+                    ii = ii + 1
+                    i = i - 1
+                turn = turn + 1
+            count = count + 1
+            pygame.display.flip()
+            pygame.event.pump()
+            pygame.time.delay(1000)
+            draw_map(pacMap)
+        
     print("No path found")
     return (0)
 
 def pathfinding(argv):
     pacMap = get_file(argv[1])
-    pacMap = replace_map(pacMap, argv[2], argv[3])
-    pacMap = put_one(pacMap, argv[3])
+    pacMap = replace_map(pacMap, 'o', ' ')
+    pacMap = put_one(pacMap, ' ')
     if (check_one(pacMap) == 0):
-        draw_map(pacMap)
         return (0)
-    find_the_path(pacMap, argv[3])
+    find_the_path(pacMap, ' ')
     return (0)
