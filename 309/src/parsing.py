@@ -63,7 +63,7 @@ def check_file(fileName):
 def check_error(argv):
     if (len(argv) == 2 and argv[1] == "-h"):
         print_help()
-        return (0)
+        return (1)
     if (len(argv) != 5):
         print("Error: too much or too many arguments")
         return (84)
@@ -74,7 +74,7 @@ def check_error(argv):
     except:
         print("Error: first, third and fourth must be number")
         return (84)
-    if (int(argv[1]) < 0 or int(argv[3]) < 0 or int(argv[4]) < 0):
+    if (int(argv[1]) <= 0 or float(argv[3]) < 0 or float(argv[4]) < 0):
         print("Error: first, third and fourth must be number >= 0")
         return (84)
     try:

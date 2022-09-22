@@ -5,8 +5,11 @@ from src.parsing import check_error
 from src.get_pollution import get_pollution
 
 def main():
-    if (check_error(argv) == 84):
+    rt = check_error(argv)
+    if (rt == 84):
         return (84)
+    if (rt == 1):
+        return (0)
     get_pollution(argv)
     return (0)
 
