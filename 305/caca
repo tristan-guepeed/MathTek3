@@ -1,0 +1,18 @@
+1er:
+    Lan, 3
+2eme:
+    Fou, 8
+    Car, 4
+3eme:
+    Cov, 2
+    Mas, 4
+4eme:
+    Ele, 1
+5eme:
+    Hea, 3
+    Plu, 1
+    Fin, 9
+
+duration:
+Lan 3 -> Fou 8 -> Car 4
+Lan Fou 11 -> Mas 4

@@ -46,9 +46,42 @@ def init_required(data):
         i+=1
     return task_required
 
+def take_first_task(task_required):
+    i = 1
+    first_task = []
+
+    while (i != len(task_required) - 1):
+        if (task_required[i + 1] == "/" and task_required[i - 1] == "/"):
+            first_task.append(task_required[i])
+        i+=1
+    return first_task
+
+def activate_task(task_id, task):
+    i = 0
+
+    while(i != len(task_id)):
+        if (task_id[i] == task):
+            task_id[i + 1] = "true"
+        i+=1
+    return task_id
+
+def check_others_task(task_order, task_required, task_duration, task_id):
+
+
+    return task_order
+
 def construction(data):
     task_id = init_task(data)
     task_duration = init_duration(data)
     task_required = init_required(data)
-    t = 0
+    task_required.insert(0, "/")
+    task_order = take_first_task(task_required)
+    task_id = activate_task(task_id, task_order[0])
+
+    if (len(task_order) == 1):
+        check_others_task(task_order, task_required, task_duration, task_id)
+        return 0
+    else:
+        #si y'a plusieurs premières task
+        return 0
     return 0

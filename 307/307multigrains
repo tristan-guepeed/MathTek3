@@ -1,29 +1,18 @@
 #!/usr/bin/env python3
 
 from sys import argv, exit
-import math
 
-def print_help():
-    print("USAGE")
-    print("\t./307multigrains n1 n2 n3 n4 po pw pc pb ps")
-    print("")
-    print("DESCRIPTION")
-    print("\tn1\tnumber of tons of fertilizer F1")
-    print("\tn2\tnumber of tons of fertilizer F2")
-    print("\tn3\tnumber of tons of fertilizer F3")
-    print("\tn4\tnumber of tons of fertilizer F4")
-    print("\tpo\tpriceof one unit of oat")
-    print("\tpw\tpriceof one unit of wheat")
-    print("\tpc\tpriceof one unit of corn")
-    print("\tpb\tpriceof one unit of barley")
-    print("\tps\tpriceof one unit of soy")
-    return (0)
+from src.check_errors import check_errors, print_help
+from src.multigrains import multigrains
 
 def main():
+    if (len(argv) != 10):
+        check_errors(argv)
     if (len(argv) == 2 and argv[1] == "-h"):
         print_help()
-        return (0)
-    return (0)
+        return 0
+    multigrains(argv)
+    return 0
 
 if __name__ == "__main__":
     exit(main())
